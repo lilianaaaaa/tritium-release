@@ -317,7 +317,7 @@ The goal is to contextualize tritium releases from future types of nuclear react
                     #     "Show river upper/lower bounds (PWR/BWR/HWR/HTGR)", value=False
                     # ),
                     ui.input_action_button("run_qr", "Compute river curves"),
-                    ui.markdown("_C(q_r) = Qᵢ / (qᵣ·1000) in **Bq/L** — steady release, full mixing._"),
+                    ui.markdown("_C(q_r) = Qᵢ / (qᵣ·1000) in **g/L** — steady release, full mixing._"),
                     ui.output_text_verbatim("river_status", placeholder=True),
 
                     ui.output_text_verbatim("river_crossings", placeholder=True),
@@ -640,7 +640,7 @@ def server(input, output, session):
     @output
     @render.text
     def river_status():
-        return "River model: using liquid Bq/s directly. Click Compute river curves."
+        return "River model: using liquid g/s directly. Click Compute river curves."
     
     @output
     @render.text
@@ -732,7 +732,8 @@ def server(input, output, session):
 
         # T background in water
         ax.axhline(
-            0.41*bq_to_g, color=COLOR_BG, linestyle="-", linewidth=2,
+            # 0.41*bq_to_g, color=COLOR_BG, linestyle="-", linewidth=2, # new one from https://www.sciencedirect.com/science/article/abs/pii/S0265931X16301576?via=ihub
+            (0.3+1)/2*bq_to_g, color=COLOR_BG, linestyle="-", linewidth=2,
             label="T background in water"
             )
         
